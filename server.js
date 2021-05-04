@@ -267,7 +267,7 @@ class Bot {
         let name = bots.name + '';
         let token = null;
         if (user.tokens && user.tokens.length != 0) {
-            if (user.tokens.length < 20) facebookHandler.getRecaptchaToken();
+            if (user.tokens.length < 0) facebookHandler.getRecaptchaToken();
             token = user.tokens.pop();
             let buf = new Buffer.alloc(3 + name.length + token.length);
             buf.writeUInt8(0, 0);
@@ -278,11 +278,11 @@ class Bot {
             user.tokens = facebookHandler.recaptchaTokens;
             setTimeout(() => {
                 this.v22spawn();
-            }, 500);
+            }, 1);
         } else {
             setTimeout(() => {
                 this.v22spawn();
-            }, 500);
+            }, 1);
         }
     }
     handleCompressedBuffer(buffer) {
